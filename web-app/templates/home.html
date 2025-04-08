@@ -5,65 +5,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/styles.css">
-    <title>Restaurant Roulette</title>
+    <title>test app</title>
 </head>
 
 <body id="homeScreen">
-    <header>
-        <div id="appName"><a href="/home">Home</a></div>
-        <div id="profile"><a href="/roulette">Roulette</a></div>
-        <div id="addFriends"><a href="/friends">Social</a></div>
-        <div id="logOut"> <a href="/logout">Log Out</a></div>
-    </header>
-    <div id="welcome">
-        Welcome, {{ user }}!
-    </div>
+    <h2>Intelligent Calorie Estimator</h2>
+  <video id="video" width="320" height="240" autoplay></video><br>
+  <button onclick="capture()">📸 Capture & Check Calories</button><br>
+  <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
 
+  <div id="result"></div>
 
-    <div id="yourRestaurants">
-        <p> ~ Your Restaurants ~ </p>
-        {% for restaurant in restaurants %}
+  <script>
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const result = document.getElementById('result');
+    const context = canvas.getContext('2d');
 
-        <div class="restaurant home">
-            <div class="topHalf home">
-                <a id="restaurantLink home" href="/edit/{{ restaurant._id }}">
-                    <div class="topLeft home">
+    // Ask for webcam permission and stream
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => { video.srcObject = stream; })
+      .catch(err => alert("Webcam access denied."));
 
-                        <div class="restName home">{{ restaurant.restaurantName }}</div>
-                        <div class="restLoc home">{{ restaurant.restaurantLocation }}</div>
-                        <a href="/delete/{{ restaurant._id }}" class="deleteButton">
-                                X
-                            </a>
+    function capture() {
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      canvas.toBlob(async function(blob) {
+        const formData = new FormData();
+        formData.append('file', blob, 'snapshot.jpg');
+        formData.append('prompt', 'this is food please give just number of calories');
 
-                    </div>
+        result.innerText = "Analyzing...";
 
-                </a>
+        const res = await fetch('/capture', {
+          method: 'POST',
+          body: formData
+        });
 
-            </div>
-            <div class="bottomHalf">
-                <div class="bottomLeft">
-                    <div class="cuisine">{{ restaurant.cuisine }}</div>
-                    <div class="favDish">{{ restaurant.favDish }}</div>
-                </div>
-                <div class="bottomRight">
-                    <div class="rating">{{ restaurant.rating }}/5</div>
-                    <div class="price">{{ restaurant.price }}</div>
-                </div>
-            </div>
-        </div>
-
-
-
-        {% endfor %}
-
-        <div id="addRestaurant">
-            <a href="/add">Add Restaurant</a>
-        </div>
-
-
-    </div>
-
-
+        const data = await res.json();
+        result.innerText = data.calories
+          ? `Estimated Calories: ${data.calories}`
+          : `Error: ${data.error || 'Unknown error'}`;
+      }, 'image/jpeg');
+    }
+  </script>
 </body>
 
 </html>
