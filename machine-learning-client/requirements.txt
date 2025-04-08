@@ -1,0 +1,8 @@
+tensorflow==2.12.0
+flask
+numpy
+pillow
+pymongo
+onnxruntime
+opencv-python-headless
+scipy

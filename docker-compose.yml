@@ -1,0 +1,25 @@
+services:
+  web-app:
+    build: ./web-app
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./web-app/static:/app/static
+    depends_on:
+      - mongodb
+      - machine-learning-client
+
+  machine-learning-client:
+    build: ./machine-learning-client
+    volumes:
+      - ./web-app/static:/app/static
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:

@@ -1,0 +1,5 @@
+flask
+numpy
+pymongo
+requests
+opencv-python-headless
