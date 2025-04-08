@@ -1,73 +1,63 @@
-from flask import Flask, request, jsonify
-from tensorflow.keras.applications import MobileNetV2
-from tensorflow.keras.applications.mobilenet_v2 import preprocess_input, decode_predictions
-from tensorflow.keras.preprocessing import image
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing.image import img_to_array
-from PIL import Image
-import numpy as np
-import onnxruntime as ort
+### Food Calories calculator APP
+from dotenv import load_dotenv
+
+load_dotenv() ## load all the environment variables
+
+import streamlit as st
 import os
-import cv2
-from scipy.special import softmax
+import google.generativeai as genai
+from PIL import Image
 
-app = Flask(__name__)
-caption_model = MobileNetV2(weights="imagenet")
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+
+## Function to load Google Gemini Pro Vision API And get response
+
+def get_gemini_repsonse(input,image,prompt):
+    model=genai.GenerativeModel('gemini-1.5-flash')
+    response=model.generate_content([input,image[0],prompt])
+    return response.text
+
+def input_image_setup(uploaded_file):
+    # Check if a file has been uploaded
+    if uploaded_file is not None:
+        # Read the file into bytes
+        bytes_data = uploaded_file.getvalue()
+
+        image_parts = [
+            {
+                "mime_type": uploaded_file.type,  # Get the mime type of the uploaded file
+                "data": bytes_data
+            }
+        ]
+        return image_parts
+    else:
+        raise FileNotFoundError("No file uploaded")
+    
+##initialize our streamlit app
+
+st.set_page_config(page_title="Intelligent Food Calories Calculator")
+
+st.header("Intelligent Food Calories Calculator")
+input=st.text_input("Input Prompt: ",key="input")
+uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
+image=""   
+if uploaded_file is not None:
+    image = Image.open(uploaded_file)
+    st.image(image, caption="Uploaded Image.", use_column_width=True)
 
 
-@app.route("/caption", methods=["POST"])
-def caption():
-    if "image" not in request.files:
-        return jsonify({"error": "No image uploaded"}), 400
+submit=st.button("Tell me the total calories")
 
-    file = request.files["image"]
-    file.save("temp.jpg")
+input_prompt="""
+You are an expert in nutritionist where you need to see the food items from the image
+               and calculate the total calories, only the numbers 
 
-    img = image.load_img("temp.jpg", target_size=(224, 224))
-    x = np.expand_dims(image.img_to_array(img), axis=0)
-    x = preprocess_input(x)
+"""
 
-    preds = caption_model.predict(x)
-    label = decode_predictions(preds, top=1)[0][0][1]
+## If submit button is clicked
 
-    return jsonify({"caption": f"This looks like a {label.lower()}."})
-
-
-# Load emotion model
-model_best = load_model("face_model.h5")
-class_names = ['Angry', 'Disgusted', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral']
-face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
-
-@app.route("/emotion", methods=["POST"])
-def detect_emotion():
-    if "image" not in request.files:
-        return jsonify({"error": "No image uploaded"}), 400
-
-    file = request.files["image"]
-    file_path = "temp_emotion.jpg"
-    file.save(file_path)
-
-    img = cv2.imread(file_path)
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5)
-
-    if len(faces) == 0:
-        return jsonify({"emotion": "no_face_detected"})
-
-    x, y, w, h = faces[0]
-    face_roi = gray[y:y + h, x:x + w]
-    face_image = cv2.resize(face_roi, (48, 48))
-    face_image = image.img_to_array(face_image)
-    face_image = np.expand_dims(face_image, axis=0)
-
-    preds = model_best.predict(face_image)
-    emotion_label = class_names[np.argmax(preds)]
-
-    print("Predictions:", preds)
-    return jsonify({
-        "emotion": emotion_label,
-        "raw": preds[0].tolist()
-    })
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+if submit:
+    image_data=input_image_setup(uploaded_file)
+    response=get_gemini_repsonse(input_prompt,image_data,input)
+    st.subheader("The Response is")
+    st.write(response)
