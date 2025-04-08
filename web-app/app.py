@@ -10,6 +10,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from dotenv import load_dotenv, dotenv_values
 from flask_login import login_required, current_user
 import requests
+from datetime import date
 
 load_dotenv()  # Load environment variables
 
@@ -137,6 +138,21 @@ def capture():
             files={"file": (file.filename, file.stream, file.mimetype)},
             data={"prompt": prompt}
         )
+        data = response.json()
+        num = data['calories']
+        exists = db.calorieData.find_one({'user_id':current_user,'date':date.today()})
+        if exists:
+            num += exists.get('calories',0)
+            db.calorieData.update_one({
+                'user_id':current_user,
+                'calories': num,
+                'date':date.today()
+            })
+        else:
+            db.calorieData.insert_one({
+            'user_id': current_user,
+            'calories': num,
+            'date': date.today()})
         return jsonify(response.json())
     except Exception as e:
         return jsonify({"error": str(e)}), 500
