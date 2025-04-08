@@ -5,10 +5,11 @@ import datetime
 import flask_login
 import pymongo
 from bson.objectid import ObjectId
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from dotenv import load_dotenv, dotenv_values
 from flask_login import login_required, current_user
+import requests
 
 load_dotenv()  # Load environment variables
 
@@ -110,12 +111,8 @@ def login():
 
 
 @app.route("/home")
-@flask_login.login_required
 def home():
-    user = flask_login.current_user.username
-    docs = db.calorieData.find({'user_id':user})
-    return render_template("home.html", user = user, data = docs)
-
+    return render_template("home.html")
 
 @app.route("/logout")
 @flask_login.login_required
@@ -124,23 +121,26 @@ def logout():
     flash("Logged out successfully", "success")
     return redirect(url_for("login"))
 
+@app.route("/capture", methods=["POST"])
+def capture():
+    file = request.files.get("file")
+    prompt = request.form.get("prompt", "")
 
-@app.route("/add", methods=["GET","POST"])
-@flask_login.login_required
-def add():
-    if request.method == "POST":
-        doc = {}
-        for item in request.form:
-            doc[item] = request.form[item]
-        doc['user_id'] = flask_login.current_user.username
-        db.calorieData.insert_one(doc)
-        return redirect("/home")
-    return render_template("add.html")
+    if not file:
+        return jsonify({"error": "No file uploaded"}), 400
 
+    try:
+        # If using Docker Compose, use service name for ML client
+        ml_url = "http://machine-learning-client:5000/predict"
+        response = requests.post(
+            ml_url,
+            files={"file": (file.filename, file.stream, file.mimetype)},
+            data={"prompt": prompt}
+        )
+        return jsonify(response.json())
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
 # Run the app
 if __name__ == "__main__":
-    FLASK_PORT = os.getenv("FLASK_PORT", "5000")
-    FLASK_ENV = os.getenv("FLASK_ENV")
-    print(f"FLASK_ENV: {FLASK_ENV}, FLASK_PORT: {FLASK_PORT}")
-
-    app.run(port=int(FLASK_PORT), debug=(FLASK_ENV == "development"))
+    app.run(debug=True, host="0.0.0.0", port=5000)
