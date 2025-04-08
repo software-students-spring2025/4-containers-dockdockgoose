@@ -140,19 +140,19 @@ def capture():
         )
         data = response.json()
         num = data['calories']
-        exists = db.calorieData.find_one({'user_id':current_user,'date':date.today()})
+        exists = db.calorieData.find_one({'user_id':current_user.username,'date':str(date.today())})
         if exists:
             num += exists.get('calories',0)
             db.calorieData.update_one({
-                'user_id':current_user,
+                'user_id':current_user.username,
                 'calories': num,
-                'date':date.today()
+                'date':str(date.today())
             })
         else:
             db.calorieData.insert_one({
-            'user_id': current_user,
+            'user_id': current_user.username,
             'calories': num,
-            'date': date.today()})
+            'date': str(date.today())})
         return jsonify(response.json())
     except Exception as e:
         return jsonify({"error": str(e)}), 500
