@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from PIL import Image
 import google.generativeai as genai
 import os
+import requests
 
 from io import BytesIO
 
@@ -46,6 +47,11 @@ def predict():
         
         # Run inference
         result = get_gemini_response(image_data, user_prompt)
+        app_url = "http://localhot:5000/home"
+        response = requests.post(
+            app_url,
+            files = {"result":result.strip()}
+        )
         return jsonify({"calories": result.strip()})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
