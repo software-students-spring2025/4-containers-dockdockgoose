@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles.css">
+    <title>test app</title>
+</head>
+
+<body id="loginScreen">
+    <div id="loginSection">
+        <h1>Login</h1>
+
+        <form id="loginForm" action="{{ url_for('login') }}" method="POST">
+            <div>
+                <div id="username">Username:</div>
+                <input class="box" type="text" name="username" value="" required>
+            </div>
+            <div>
+                <div id="password">Password:</div>
+                <input class="box" type="password" name="password" value="" required>
+
+            </div>
+
+            <input id="logButton" type="submit" value="Log in">
+        </form>
+
+        <div id="noAccount">
+            <h5>Don't have an account?</h5>
+            <a href="/register">Register Now!</a>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles.css">
+    <title>Restaurant Roulette</title>
+</head>
+
+<body id="homeScreen">
+    <header>
+        <div id="appName"><a href="/home">Home</a></div>
+        <div id="profile"><a href="/roulette">Roulette</a></div>
+        <div id="addFriends"><a href="/friends">Social</a></div>
+        <div id="logOut"> <a href="/logout">Log Out</a></div>
+    </header>
+    <div id="welcome">
+        Welcome, {{ user }}!
+    </div>
+
+
+    <div id="yourRestaurants">
+        <p> ~ Your Restaurants ~ </p>
+        {% for restaurant in restaurants %}
+
+        <div class="restaurant home">
+            <div class="topHalf home">
+                <a id="restaurantLink home" href="/edit/{{ restaurant._id }}">
+                    <div class="topLeft home">
+
+                        <div class="restName home">{{ restaurant.restaurantName }}</div>
+                        <div class="restLoc home">{{ restaurant.restaurantLocation }}</div>
+                        <a href="/delete/{{ restaurant._id }}" class="deleteButton">
+                                X
+                            </a>
+
+                    </div>
+
+                </a>
+
+            </div>
+            <div class="bottomHalf">
+                <div class="bottomLeft">
+                    <div class="cuisine">{{ restaurant.cuisine }}</div>
+                    <div class="favDish">{{ restaurant.favDish }}</div>
+                </div>
+                <div class="bottomRight">
+                    <div class="rating">{{ restaurant.rating }}/5</div>
+                    <div class="price">{{ restaurant.price }}</div>
+                </div>
+            </div>
+        </div>
+
+
+
+        {% endfor %}
+
+        <div id="addRestaurant">
+            <a href="/add">Add Restaurant</a>
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>
