@@ -17,7 +17,7 @@ def test_input_image_setup():
 
 def test_get_gemini_response():
     """Test the get_gemini_response function for correct output."""
-    print("hello")
+    print("test test test")
 
 
 def test_predict():
