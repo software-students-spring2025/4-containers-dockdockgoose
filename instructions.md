@@ -47,7 +47,7 @@ The machine learning client will be written in Python and will connect to the da
 - Unit tests using [pytest](https://docs.pytest.org/en/7.2.x/) must be written for the client device code that provide at least 80% code coverage of the client code, as reported by the [coverage](https://coverage.readthedocs.io/) tool.
 - The client must have a Continuous Integration (CI) workflow using [GitHub Actions](https://github.com/features/actions) that automatically builds and tests the updated client subsystem every time a pull request is approved and code is merged into the `main` branch.
 - Like the other parts, the machine learning client must run within its own Docker container.
-- Put all code for this subsystem within the `machine-learning-client` subdirectory of this repository.
+- Put all code for this subsystem within the `machine_learning_client` subdirectory of this repository.
 
 ### Web app
 
@@ -136,7 +136,7 @@ All developers are expected to participate in reviewing and approving teammates'
 
 ### Code linting and formatting
 
-A [GitHub Actions workflow script](./.github/workflows/lint.yml) is included in this repository that will automatically run the `pylint` linter and the `black` formatter in both the `web-app` and `machine-learning-client` subdirectories to check the code in every pull request for its adherence to the proper code conventions. If the code does not pass such a check, the pull request must not be approved or merged.
+A [GitHub Actions workflow script](./.github/workflows/lint.yml) is included in this repository that will automatically run the `pylint` linter and the `black` formatter in both the `web-app` and `machine_learning_client` subdirectories to check the code in every pull request for its adherence to the proper code conventions. If the code does not pass such a check, the pull request must not be approved or merged.
 
 Due to its general-purpose design, and the fact that it checks all code the same way, regardless of whether that code is part of the web app, machine learning client, or other subsystem, **the given workflow script may not be appropriate for all projects**. You are welcome to modify it as necessary to suit your project's needs, as long as the spirit of the check remains the same.
 

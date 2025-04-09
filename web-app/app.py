@@ -144,6 +144,7 @@ def home():
     )
     return render_template("home.html", logs=logs, username=current_user.username)
 
+
 @app.route("/logout")
 @flask_login.login_required
 def logout():
@@ -164,7 +165,7 @@ def capture():
         return jsonify({"error": "No file uploaded"}), 400
 
     try:
-        ml_url = "http://machine-learning-client:5000/predict"
+        ml_url = "http://machine_learning_client:5000/predict"
         response = requests.post(
             ml_url,
             files={"file": (file.filename, file.stream, file.mimetype)},
@@ -199,14 +200,15 @@ def capture():
 
     except requests.RequestException as e:
         return jsonify({"error": str(e)}), 500
-    
 
-@app.template_filter('pretty_date')
+
+@app.template_filter("pretty_date")
 def pretty_date(value):
     try:
         return datetime.strptime(value, "%Y-%m-%d").strftime("%B %-d, %Y")  # Mac/Linux
     except ValueError:
         return value
+
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)

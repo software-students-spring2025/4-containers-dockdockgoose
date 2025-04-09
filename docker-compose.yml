@@ -11,7 +11,7 @@ services:
       - ./web-app/static:/app/static
     depends_on:
       - mongodb
-      - machine-learning-client
+      - machine_learning_client
 
   test:
     build:
@@ -20,20 +20,20 @@ services:
     command: pytest tests/test_webapp.py
     depends_on:
       - mongodb
-      - machine-learning-client
+      - machine_learning_client
 
   ml-test:
     build:
       context: .
-      dockerfile: machine-learning-client/Dockerfile
+      dockerfile: machine_learning_client/Dockerfile
     command: pytest tests/test_mlclient.py
     depends_on:
       - mongodb
 
-  machine-learning-client:
+  machine_learning_client:
     build:
       context: .
-      dockerfile: machine-learning-client/Dockerfile
+      dockerfile: machine_learning_client/Dockerfile
     volumes:
       - ./web-app/static:/app/static
     depends_on:

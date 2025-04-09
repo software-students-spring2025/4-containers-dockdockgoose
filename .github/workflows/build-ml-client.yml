@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'machine-learning-client/**'
+      - 'machine_learning_client/**'
       - 'test/test_mlclient.py'
 
 jobs:
