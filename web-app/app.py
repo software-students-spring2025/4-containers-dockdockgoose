@@ -131,7 +131,7 @@ def capture():
         return jsonify({"error": "No file uploaded"}), 400
 
     try:
-        # If using Docker Compose, use service name for ML client
+        # Talk to the ML client
         ml_url = "http://machine-learning-client:5000/predict"
         response = requests.post(
             ml_url,
@@ -139,24 +139,32 @@ def capture():
             data={"prompt": prompt}
         )
         data = response.json()
-        num = data['calories']
-        exists = db.calorieData.find_one({'user_id':current_user.username,'date':str(date.today())})
-        if exists:
-            num += exists.get('calories',0)
-            db.calorieData.update_one({
-                'user_id':current_user.username,
-                'calories': num,
-                'date':str(date.today())
-            })
+        num = data.get('calories')
+
+        # Ensure num is a valid number
+        if isinstance(num, (int, float)) or (isinstance(num, str) and num.isdigit()):
+            num = int(num)  # or float(num) if decimal expected
+
+            # Check for existing entry
+            query = {'user_id': current_user.username, 'date': str(date.today())}
+            existing = db.calorieData.find_one(query)
+
+            if existing:
+                num += existing.get('calories', 0)
+                db.calorieData.update_one(query, {'$set': {'calories': num}})
+            else:
+                db.calorieData.insert_one({
+                    'user_id': current_user.username,
+                    'calories': num,
+                    'date': str(date.today())
+                })
         else:
-            db.calorieData.insert_one({
-            'user_id': current_user.username,
-            'calories': num,
-            'date': str(date.today())})
-        return jsonify(response.json())
+            return jsonify({"error": f"Invalid calorie response: {num}"}), 400
+        return jsonify(data)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
+
 # Run the app
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)
