@@ -24,6 +24,8 @@ from flask import (
 from dotenv import load_dotenv, dotenv_values
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import current_user
+from datetime import datetime
+
 
 # Load environment variables
 load_dotenv()
@@ -132,10 +134,15 @@ def login():
 
 
 @app.route("/home")
+@flask_login.login_required
 def home():
     """Homepage"""
-    return render_template("home.html")
-
+    logs = (
+        db.calorieData.find({"user_id": current_user.username})
+        .sort("date", -1)  # Sort by most recent date
+        .limit(5)  # Show last 5 entries
+    )
+    return render_template("home.html", logs=logs, username=current_user.username)
 
 @app.route("/logout")
 @flask_login.login_required
@@ -192,7 +199,14 @@ def capture():
 
     except requests.RequestException as e:
         return jsonify({"error": str(e)}), 500
+    
 
+@app.template_filter('pretty_date')
+def pretty_date(value):
+    try:
+        return datetime.strptime(value, "%Y-%m-%d").strftime("%B %-d, %Y")  # Mac/Linux
+    except ValueError:
+        return value
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)

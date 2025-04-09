@@ -11,10 +11,7 @@ genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 app = Flask(__name__)
 
-INSTRUCTION_PROMPT = (
-    "tell me how many cal is in this no yapping just a number if you need to guess it "
-    "then guess it but give just ONE number in response"
-)
+INSTRUCTION_PROMPT = os.getenv("INSTRUCTION_PROMPT")
 
 
 def input_image_setup(file_bytes, mime_type):
@@ -53,7 +50,6 @@ def predict():
 def index():
     """Health check endpoint."""
     return jsonify({"message": "ML client is running"}), 200
-
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)
