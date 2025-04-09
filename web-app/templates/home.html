@@ -10,6 +10,11 @@
 
 <body id="homeScreen" class="center-container">
     <h2>Intelligent Calorie Estimator</h2>
+    <a href="{{ url_for('logout') }}" style="position: absolute; top: 20px; right: 20px; text-decoration: none;">
+      <button style="background-color: #e74c3c; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer;">
+        Logout
+      </button>
+    </a>
     <h3>Welcome, {{ username }}</h3>
   <video id="video" width="320" height="240" autoplay></video><br>
   <button onclick="capture()">📸 Capture & Check Calories</button><br>
