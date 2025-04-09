@@ -1,15 +1,15 @@
-name: CI-Web-App
+name: CI-web_app
 
 on:
   pull_request:
     branches:
       - main
     paths:
-      - "web-app/**"
+      - "web_app/**"
       - "test/test_webapp.py"
 
 jobs:
-  test-web-app:
+  test-web_app:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 

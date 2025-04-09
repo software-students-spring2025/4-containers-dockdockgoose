@@ -7,6 +7,7 @@ and interfaces with the machine learning client.
 """
 
 import os
+from datetime import datetime
 from datetime import date
 from bson.objectid import ObjectId
 import requests
@@ -24,7 +25,7 @@ from flask import (
 from dotenv import load_dotenv, dotenv_values
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import current_user
-from datetime import datetime
+
 
 
 # Load environment variables
@@ -204,6 +205,7 @@ def capture():
 
 @app.template_filter("pretty_date")
 def pretty_date(value):
+    """ Formatting the date """
     try:
         return datetime.strptime(value, "%Y-%m-%d").strftime("%B %-d, %Y")  # Mac/Linux
     except ValueError:

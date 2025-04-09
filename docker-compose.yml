@@ -1,14 +1,14 @@
 version: "3.8"
 
 services:
-  web-app:
+  web_app:
     build:
       context: .
-      dockerfile: web-app/Dockerfile
+      dockerfile: web_app/Dockerfile
     ports:
       - "5000:5000"
     volumes:
-      - ./web-app/static:/app/static
+      - ./web_app/static:/app/static
     depends_on:
       - mongodb
       - machine_learning_client
@@ -16,7 +16,7 @@ services:
   test:
     build:
       context: .
-      dockerfile: web-app/Dockerfile
+      dockerfile: web_app/Dockerfile
     command: pytest tests/test_webapp.py
     depends_on:
       - mongodb
@@ -35,7 +35,7 @@ services:
       context: .
       dockerfile: machine_learning_client/Dockerfile
     volumes:
-      - ./web-app/static:/app/static
+      - ./web_app/static:/app/static
     depends_on:
       - mongodb
 
