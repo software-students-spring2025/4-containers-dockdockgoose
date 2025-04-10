@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+  webapp:
+    build: ./webapp
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./webapp/static:/app/static
+    depends_on:
+      - mongodb
+      - mlclient
+
+  test:
+    build: ./webapp
+    command: pytest /app/tests/test_webapp.py
+    volumes:
+      - ./tests:/app/tests
+    depends_on:
+      - mongodb
+      - mlclient
+
+  mlclient:
+    build: ./mlclient
+    volumes:
+      - ./webapp/static:/app/static
+    depends_on:
+      - mongodb
+
+  ml-test:
+    build: ./mlclient
+    command: pytest /app/tests/test_mlclient.py
+    volumes:
+      - ./tests:/app/tests
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:

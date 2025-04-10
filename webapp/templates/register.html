@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles.css">
+    <title>test app</title>
+</head>
+
+<body id="registerScreen">
+    <div id="regSection">
+        <h1>Get Started</h1>
+
+        <form id="regForm" action="register" method="POST">
+            <div>
+                <div id="username">Email:</div>
+                <input class="box" type="text" name="email" value="" required>
+            </div>
+            <div>
+                <div id="username">Username:</div>
+                <input class="box" type="text" name="username" value="" minlength="7" required>
+            </div>
+            <div>
+                <div id="password">Password:</div>
+                <input class="box" type="password" name="password" value="" minlength="7" required>
+            </div>
+            <div>
+                <div id="password">Confirm Password:</div>
+                <input class="box" type="password" name="confirmPassword" value="" minlength="7" required>
+            </div>
+
+            <input id="logButton" type="submit" value="Register" required>
+        </form>
+
+        <div id="noAccount">
+            <h5>Already have an account?</h5>
+            <a href="/login">Log in</a>
+        </div>
+    </div>
+</body>
+
+</html>

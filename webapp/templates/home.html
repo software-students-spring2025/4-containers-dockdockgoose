@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles.css">
+    <title>test app</title>
+</head>
+
+<body id="homeScreen" class="center-container">
+    <h2>Intelligent Calorie Estimator</h2>
+    <h3>Welcome, {{ username }}</h3>
+  <video id="video" width="320" height="240" autoplay></video><br>
+  <button onclick="capture()">📸 Capture & Check Calories</button><br>
+  <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
+
+  <div id="result"></div>
+
+  <h3>Recent Calorie Logs</h3>
+    <ul>
+  {% for log in logs %}
+    <li>{{ log.date | pretty_date }}: {{ log.calories }} total calories</li>
+  {% else %}
+    <li>No scans yet.</li>
+  {% endfor %}
+    </ul>
+
+  <script>
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const result = document.getElementById('result');
+    const context = canvas.getContext('2d');
+
+    // Ask for webcam permission and stream
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => { video.srcObject = stream; })
+      .catch(err => alert("Webcam access denied."));
+
+    function capture() {
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      canvas.toBlob(async function(blob) {
+        const formData = new FormData();
+        formData.append('file', blob, 'snapshot.jpg');
+        formData.append('prompt', 'this is food please give just number of calories');
+
+        result.innerText = "Analyzing...";
+
+        const res = await fetch('/capture', {
+          method: 'POST',
+          body: formData
+        });
+
+        const data = await res.json();
+        result.innerText = data.calories
+          ? `Estimated Calories: ${data.calories}`
+          : `Error: ${data.error || 'Unknown error'}`;
+      }, 'image/jpeg');
+    }
+  </script>
+</body>
+
+</html>
