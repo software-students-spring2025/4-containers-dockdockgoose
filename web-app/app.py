@@ -200,9 +200,10 @@ def capture():
     except requests.RequestException as e:
         return jsonify({"error": str(e)}), 500
 
+
 @app.template_filter("pretty_date")
 def pretty_date(value):
-    """Format a date string (YYYY-MM-DD) into a human-readable format"""    
+    """Format a date string (YYYY-MM-DD) into a human-readable format"""
     try:
         return datetime.strptime(value, "%Y-%m-%d").strftime("%B %-d, %Y")  # Mac/Linux
     except ValueError:
