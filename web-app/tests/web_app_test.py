@@ -21,8 +21,8 @@ def client():
             app.config["MONGO_DBNAME"] = "test_webapp_db"
             from pymongo import MongoClient
             test_db = MongoClient(os.environ["MONGO_URI"])[os.environ["MONGO_DBNAME"]]
-            test_db.calcountInfo.delete_many({})
-            test_db.calorieData.delete_many({})
+            test_db.calcountInfo.delete_many({"username": "testuser"})
+            test_db.calorieData.delete_many({"user_id": "testuser"})
             User.create_user("test@example.com", "testuser", "password123")
         yield client
 
