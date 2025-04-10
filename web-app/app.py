@@ -7,7 +7,7 @@ and interfaces with the machine learning client.
 """
 
 import os
-from datetime import date
+from datetime import date, datetime
 from bson.objectid import ObjectId
 import requests
 import pymongo
@@ -24,7 +24,6 @@ from flask import (
 from dotenv import load_dotenv, dotenv_values
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import current_user
-from datetime import datetime
 
 
 # Load environment variables
@@ -144,6 +143,7 @@ def home():
     )
     return render_template("home.html", logs=logs, username=current_user.username)
 
+
 @app.route("/logout")
 @flask_login.login_required
 def logout():
@@ -199,14 +199,15 @@ def capture():
 
     except requests.RequestException as e:
         return jsonify({"error": str(e)}), 500
-    
 
-@app.template_filter('pretty_date')
+@app.template_filter("pretty_date")
 def pretty_date(value):
+    """Format a date string (YYYY-MM-DD) into a human-readable format"""    
     try:
         return datetime.strptime(value, "%Y-%m-%d").strftime("%B %-d, %Y")  # Mac/Linux
     except ValueError:
         return value
+
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)
