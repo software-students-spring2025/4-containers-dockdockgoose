@@ -27,3 +27,14 @@ jobs:
       - name: Show logs on failure
         if: failure()
         run: docker-compose logs
+      
+      - name: Install Python dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y python3-pip
+          pip install pylint
+
+      - name: Lint with pylint
+        run: |
+          pylint machine_learning_client/**/*.py
+
