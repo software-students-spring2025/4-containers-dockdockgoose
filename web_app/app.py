@@ -27,7 +27,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import current_user
 
 
-
 # Load environment variables
 load_dotenv()
 
@@ -205,7 +204,7 @@ def capture():
 
 @app.template_filter("pretty_date")
 def pretty_date(value):
-    """ Formatting the date """
+    """Formatting the date"""
     try:
         return datetime.strptime(value, "%Y-%m-%d").strftime("%B %-d, %Y")  # Mac/Linux
     except ValueError:

@@ -22,7 +22,9 @@ def input_image_setup(file_bytes, mime_type):
 def get_gemini_response(image_data, user_prompt):
     """Send image and prompt to Gemini API and return response."""
     model = genai.GenerativeModel("gemini-1.5-flash")
-    response = model.generate_content([INSTRUCTION_PROMPT, image_data[0], user_prompt])
+    response = model.generate_content(
+        [INSTRUCTION_PROMPT, image_data[0], user_prompt]
+    )
     return response.text
 
 
