@@ -26,5 +26,9 @@ jobs:
           pip install pytest pytest-flask coverage
 
       - name: Run tests
+        env:
+          MONGO_DBNAME: test_db
+          MONGO_URI: mongodb://localhost:27017/
+          SECRET_KEY: test_secret
         run: |
           pytest --cov=app tests/
