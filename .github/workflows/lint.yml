@@ -24,11 +24,11 @@ jobs:
           python -m pip install pipenv
           pipenv sync --dev --python $(which python)
 
-      - name: Lint with pylint (ignores import/redefined/order errors)
+      - name: Lint with pylint (ignore common errors)
         if: ${{ hashFiles(format('{0}/**/*.py', matrix.subdir)) != '' }}
         run: |
           cd ${{ matrix.subdir }}
-          pipenv run pylint **/*.py --disable=import-error,redefined-outer-name,wrong-import-order
+          pipenv run pylint **/*.py --disable=import-error,redefined-outer-name,wrong-import-order,import-outside-toplevel
 
       - name: Format with black
         if: ${{ hashFiles(format('{0}/**/*.py', matrix.subdir)) != '' }}

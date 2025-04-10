@@ -4,12 +4,14 @@ Unit tests for the machine learning client service.
 Covers health check endpoint, image upload handling, and
 interactions with the Gemini response function.
 """
+
 import io
 import sys
 import os
 from unittest.mock import patch
 import pytest
 from app import app  # noqa: E402
+
 # Ensure the app module is accessible
 sys.path.insert(0, os.path.abspath(os.path.dirname(__file__) + "/.."))
 
