@@ -12,8 +12,15 @@ jobs:
       run:
         working-directory: web-app
 
-    steps:
-      - uses: actions/checkout@v4
+  services:
+    mongo:
+      image: mongo
+      ports:
+        - 27017:27017
+
+  steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -22,12 +29,14 @@ jobs:
 
       - name: Install dependencies
         run: |
+          pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest pytest-flask coverage
+          pip install pytest pytest-flask pytest-cov
 
       - name: Run tests
         env:
           MONGO_DBNAME: test_db
           MONGO_URI: mongodb://localhost:27017/
+          SECRET_KEY: test_secret
         run: |
           pytest --cov=app tests/

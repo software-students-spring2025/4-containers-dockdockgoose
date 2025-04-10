@@ -1,17 +1,19 @@
 import pytest
 from app import app, db, User
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 import io
 
 @pytest.fixture(autouse=True)
 def client():
-    app.config["TESTING"] = True
-    with app.test_client() as client:
-        with app.app_context():
-            db.calcountInfo.delete_many({})
-            db.calorieData.delete_many({})
-            User.create_user("test@example.com", "testuser", "password123")
-        yield client
+    with patch("app.db") as mock_db:
+        mock_db.calcountInfo.delete_many = MagicMock()
+        mock_db.calcountInfo.find_one = MagicMock(return_value=None)
+        mock_db.calcountInfo.insert_one = MagicMock()
+        mock_db.calorieData.find = MagicMock(return_value=MagicMock(sort=lambda x, y: MagicMock(limit=lambda z: [])))
+
+        app.config["TESTING"] = True
+        with app.test_client() as client:
+            yield client
 
 def login(client):
     return client.post("/login", data={
