@@ -22,8 +22,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
-          pip install pytest pytest-flask coverage
+            pip install -r requirements.txt
+            pip install pytest pytest-flask pytest-cov coverage
 
       - name: Run tests
         run: |
