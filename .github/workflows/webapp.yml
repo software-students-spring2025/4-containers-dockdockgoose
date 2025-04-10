@@ -8,6 +8,13 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+
+    services:
+      mongo:
+        image: mongo
+        ports:
+          - 27017:27017
+
     defaults:
       run:
         working-directory: web-app
@@ -18,17 +25,20 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: "3.12"
 
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-          pip install pytest pytest-flask coverage
+          pip install pytest pytest-flask pytest-cov
+
+      - name: Wait for Mongo to be ready
+        run: sleep 5
 
       - name: Run tests
         env:
-          MONGO_DBNAME: test_db
+          MONGO_DBNAME: test_webapp_db
           MONGO_URI: mongodb://localhost:27017/
-          SECRET_KEY: test_secret
+          SECRET_KEY: testing_secret
         run: |
           pytest --cov=app tests/
