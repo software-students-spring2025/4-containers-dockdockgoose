@@ -1,4 +1,3 @@
-
 ![Lint-free](https://github.com/nyu-software-engineering/containerized-app-exercise/actions/workflows/lint.yml/badge.svg)
 
 [![ML Client CI](https://github.com/software-students-spring2025/4-containers-dockdockgoose/actions/workflows/mlclient.yml/badge.svg)](https://github.com/software-students-spring2025/4-containers-dockdockgoose/actions/workflows/mlclient.yml)
@@ -18,26 +17,26 @@ Build a containerized app that uses machine learning. See [instructions](./instr
 
 ## Concept
 
-The concept of our web app is to act as a calorie counter. 
+The concept of our web app is to act as a calorie counter.
 
-We aim to streamline the process of counting calories as well as make it more accurate by using AI. 
-This will help many along their journey with fitness and dieting. 
+We aim to streamline the process of counting calories by using AI. This will help many along their journey with fitness and dieting.
 
 Within our project, we created a system of interworked Docker containers.
-Our project uses a machine learning client in our web app interface. 
-We incorporated a data base to track and collect the input. 
+Our project uses a machine learning client in our web app interface.
+We incorporated a MongoDB database to track and collect the input.
 
-We used Gemini as our machine learning client. We used data collected from the camera as an input. 
-You can collect data through the camera by capturing an image of the food. 
+We used Gemini as our machine learning client and data collected from the camera as input.
+You can collect data through the camera by capturing an image of the food.
 
-Upon capturing the image, we feed the image and prompt into the machine learning client. 
+Upon capturing the image, we feed the image and prompt into the machine learning client.
 
-If the machine learning client does not detect a food, it will return an error. 
-If the machine learning client detects a food, it will return the calories associated with the food. 
+If the machine learning client does not detect a food, it will return an error.
+If the machine learning client detects a food, it will return the calories associated with the food.
+Each data input for a data will tally up and be displayed on the homepage so users can track their intake.
 
 ## Setup Instructions
 
-To get our container up and running, follow the steps below. 
+To get our container up and running, follow the steps below.
 
 ---
 
@@ -59,74 +58,88 @@ docker compose up
 Once the docker container is built, you can access the web app by entering the below into your browser:
 http://localhost:5000
 
-
 ## Standup Meetings
 
 ### Standup Report - April 8th, 2025
+
 ---
 
-Franyel 
+Franyel
+
 - did: Set up Docker and MongoDB
-- doing: Testing Gemini API 
+- doing: Testing Gemini API
 - blockers: none
 
 Clarissa
-- did: Making taskboard 
+
+- did: Making taskboard
 - doing: Starting frontend
 - blockers: none
 
 Tony
+
 - did: Nothing yet
-- doing: Helping with front and backend 
-- blockers: Test for another class 
+- doing: Helping with front and backend
+- blockers: Test for another class
 
 Harini
+
 - did: Research
 - doing: Login page
 - blockers: none
 
 ### Standup Report - April 9th, 2025
+
 ---
 
-Franyel 
+Franyel
+
 - did: tested Gemini API
 - doing: tests for ml client and web app
 - blockers: none
 
-Clarissa 
+Clarissa
+
 - did: frontend
 - doing: readme
 - blockers: none
 
-Tony 
+Tony
+
 - did: edited home page
 - doing: run pytests
 - block: none
 
-Harini 
+Harini
+
 - did: login page
 - doing: home page
 - blockers: none
 
 ### Standup Report - April 10th, 2025
+
 ---
 
-Franyel 
+Franyel
+
 - did: tests for ml client and web app
 - doing: fixing bugs in tests
 - blockers: none
 
-Clarissa 
+Clarissa
+
 - did: readme
 - doing: frontend and styles.css
 - blockers: none
 
-Tony 
+Tony
+
 - did: edited home page and made logout function
 - doing: run pytests
 - block: none
 
-Harini 
+Harini
+
 - did: contributed to login and registration pages
 - doing: helping with testing bugs
 - blockers: none
