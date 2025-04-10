@@ -2,24 +2,22 @@
     margin: 0;
     padding: 0;
     /* border: solid; */
-    font-family: sans-serif;
+    font-family: Lexend;
 }
 
 :root {
-    --primary-color: #c93c53;
-    /* Main theme color */
-    --secondary-color: #edf2f4;
-    /* Accent color */
-    --background-color: #8d99ae;
-    /* Background color */
-    --text-color1: #1a1b26;
-    /* Default text color */
+    --primary-color: #415a77;
+
+    --background-color: #778da9;
+
+    --text-color1: #e0e1dd;
+
     --text-color2: #f5f5f5;
-    /* Default text color */
-    --button-color: #782b34;
-    /* Button background */
+
+    --button-color: #0d1b2a;
+
     --button-text-color: #edf2f4;
-    /* Button text */
+
 }
 
 #loginSection,
@@ -27,21 +25,19 @@
     display: flex;
     flex-direction: column;
     background-color: var(--primary-color);
-    width: 50%;
-    height: fit-content;
-    padding: 20px;
-    border-radius: 7px;
-    border: solid var(--button-color) 2px;
+    width: fit-content;
+    height: 400px;
+    padding: 25px;
+    border-radius:  20px;
+    border: none;
+    
+}
+#regSection{
+    height: 560px;
 }
 
 #loginScreen,
-#registerScreen,
-#homeScreen,
-#friendsScreen,
-#shuffleScreen,
-#profileScreen,
-#addScreen,
-#editScreen {
+#registerScreen{
     background-color: var(--background-color);
     display: flex;
     align-items: center;
@@ -61,9 +57,8 @@ h1 {
     font-weight: 900;
     align-self: center;
     margin: 15px;
-    font-size: 23px;
-    ;
-    width: 150px;
+    font-size: 35px;
+    width: 100%;
 }
 
 #username,
@@ -71,7 +66,8 @@ h1 {
     font-weight: 700;
     color: var(--text-color2);
     margin-bottom: 5px;
-    ;
+    margin-top: 15px;;
+    font-size: 18px;
 }
 
 #loginForm div {
@@ -80,22 +76,26 @@ h1 {
 }
 
 .box {
-    border: solid 2px var(--button-color);
+    border: none;
     padding: 5px;
     margin-bottom: 10px;
-    width: 92%;
-    align-self: center;
+    width: 355px;
+
 }
 
 #logButton {
     padding: 5px;
-    width: 100px;
+    width: 150px;
+    height:40px;
     color: var(--button-text-color);
     background-color: var(--button-color);
-    border: 2px solid;
+    border: none;
     margin-top: 20px;
     align-self: center;
-    border-radius: 2px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 900;
+    cursor: pointer;
 }
 
 #noAccount {
@@ -104,7 +104,8 @@ h1 {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin-top: 20px;
+    margin-top: 27px;
+    font-size: 20px;
 }
 
 #noAccount h5 {
@@ -121,8 +122,7 @@ a:active {
     color: var(--text-color1);
 }
 
-#homeScreen,
-#shuffleScreen {
+#homeScreen {
     display: block;
     flex-direction: column;
 }
@@ -137,9 +137,7 @@ header {
     padding-left: 0px;
 }
 
-#addFriends,
 #logOut,
-#profile,
 #appName {
     margin-left: 10%;
     color: var(--button-text-color);
@@ -147,132 +145,7 @@ header {
     font-size: 0.85em;
 }
 
-#yourRestaurants {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
 
-#yourRestaurants p {
-    margin: 20px;
-    font-size: 30px;
-    font-weight: 900;
-    color: var(--primary-color);
-    background-color: white;
-    width: 100%;
-    text-align: center;
-    box-shadow: inset 0 0 10px #00000078;
-}
-
-.restaurant {
-    height: 200px;
-    background-color: var(--secondary-color);
-    border-radius: 10px;
-    border: 2px solid;
-    width: 70%;
-    transition: transform 0.2s ease-in-out;
-    margin-bottom: 30px;
-}
-
-.restaurant:hover {
-    transform: translateY(-10px);
-}
-
-#addRestaurant {
-    margin-top: 20px;
-    margin-bottom: 50px;
-    font-size: 16pt;
-    padding: 10px;
-    background-color: var(--button-color);
-    border-radius: 5px;
-    border: solid;
-    font-weight: 700;
-    align-self: center;
-    text-align: center;
-}
-
-#addRestaurant a {
-    text-decoration: none;
-}
-
-#restaurantLink {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-}
-
-.topHalf {
-    height: 40%;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    background: rgb(2, 0, 33);
-    background: linear-gradient(90deg, rgba(2, 0, 33, 1) 0%, rgba(201, 60, 83, 1) 30%, rgba(201, 60, 83, 1) 70%, rgba(2, 0, 33, 1) 100%);
-    padding-left: 5%;
-    padding-top: 5%;
-    -webkit-box-shadow: 1px 4px 9px 3px rgba(0, 0, 0, 0.22);
-    -moz-box-shadow: 1px 4px 9px 3px rgba(0, 0, 0, 0.22);
-    box-shadow: 1px 4px 9px 3px rgba(0, 0, 0, 0.22);
-    border-bottom: var(--background-color) solid 2px;
-}
-
-.bottomHalf {
-    height: 40%;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    display: flex;
-    padding-top: 15px;
-}
-
-.restName {
-    color: var(--text-color2);
-    font-size: 100%;
-    font-weight: 700;
-}
-
-.restLoc {
-    font-size: 75%;
-    margin-top: 10px;
-    color: var(--secondary-color);
-}
-
-.bottomLeft,
-.bottomRight {
-    width: 50%;
-    display: flex;
-    line-height: 25px;
-    flex-direction: column;
-    color: var(--text-color1);
-    font-size: 70%;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.bottomLeft {
-    border-bottom-left-radius: 10px;
-}
-
-.bottomRight {
-    border-bottom-right-radius: 10px;
-}
-
-.cuisine,
-.favDish,
-.rating,
-.price {
-    color: var(--secondary-color);
-    padding-bottom: 5px;
-    padding-top: 5px;
-    height: 23px;
-    width: 100%;
-    text-align: center;
-    font-weight: bold;
-    background-color: var(--primary-color);
-    opacity: 0.6;
-    border-top: black solid;
-    border-bottom: black solid;
-}
 
 #welcome {
     font-size: 16pt;
@@ -282,136 +155,7 @@ header {
     padding-top: 25px;
 }
 
-#friendsScreen {
-    display: block;
-    flex-direction: column;
-}
 
-#searchForm {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-#search {
-    width: 100%;
-    display: flex;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin-top: 20%;
-}
-
-#search p,
-#AllFriends p {
-    color: var(--text-color1);
-    font-weight: 700;
-    margin-bottom: 10px;
-    font-size: 18pt;
-    font-weight: 800;
-}
-
-#searchBox {
-    width: 100%;
-    height: 20px;
-    border-radius: 5px;
-}
-
-#searchButton {
-    width: 70%;
-    height: 30px;
-    background-color: var(--button-color);
-    color: var(--button-text-color);
-    font-weight: 900;
-    border: solid 2px;
-    border-radius: 5px;
-}
-
-#AllFriends {
-    width: 100%;
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.friend {
-    width: 70%;
-    height: 30px;
-    background: rgb(2, 0, 33);
-    background: linear-gradient(0deg, rgba(2, 0, 33, 1) 0%, rgba(201, 60, 83, 1) 20%, rgba(201, 60, 83, 1) 70%, rgba(2, 0, 33, 1) 100%);
-    margin-bottom: 30px;
-    border-radius: 10px;
-    padding: 10px;
-    border: solid 3px var(--text-color1);
-    font-weight: 800;
-}
-
-.friendUser {
-    color: var(--text-color2);
-    font-size: 16pt;
-    line-height: 30px;
-}
-
-#addForm,
-#editForm {
-    display: flex;
-    flex-direction: column;
-}
-
-.deleteButton {
-    cursor: pointer;
-    font-family: sans-serif;
-    background-color: white;
-    width: 30px;
-    height: 30px;
-    position: relative;
-    top: -70%;
-    left: 84%;
-    border-radius: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14pt;
-    font-weight: 900;
-    z-index: 20;
-    color: var(--text-color1);
-}
-
-.deleteButton:link {
-    color: var(--text-color1);
-}
-
-#shuffleScreen {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.topHalf {
-    flex-wrap: nowrap;
-    flex-direction: column;
-}
-
-#restaurantLink {
-    align-self: flex-start;
-    height: fit-content;
-}
-
-.topLeft {
-    width: 100%;
-}
-
-header {
-    position: absolute;
-    top: 0;
-    width: 100%;
-}
 
 a,
 a:visited {
@@ -423,208 +167,108 @@ a:active {
     text-decoration: underline;
 }
 
-#aShuffle {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding-top: 20%;
-}
-
-#shuffleButton,
-#tryAgain {
-    cursor: pointer;
-    background-color: var(--button-color);
-    width: 70%;
-    text-align: center;
-    height: 60px;
-    font-size: 30pt;
-    font-weight: 900;
-    color: var(--text-color2);
-    border-radius: 10px;
-    border: 2px solid var(--primary-color);
-}
-
-.restName,
-.restLoc {
-    position: relative;
-}
-
-#tryAgain {
-    width: 120%;
-    height: 40px;
-    font-size: 16pt;
-    font-weight: 700;
-    line-height: 40px;
-}
-
-#shuffleResults p {
-    padding-top: 40px;
-    padding-bottom: 15px;
-    color: var(--text-color1);
-    font-size: 16pt;
-    font-weight: 700;
-    color: var(--text-color1)
-}
-
-#shuffleResults {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-#shuffleResults {
-    display: none;
-}
-
-#noFriends,
-#searchResults {
-    font-size: 16pt !important;
-    color: var(--text-color2) !important;
-    font-weight: 800;
-}
-
-#searchResults {
-    margin-top: 20px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-#searchResults p {
-    margin-bottom: 10px;
-}
-
-.friend {
-    width: 300px;
-    display: flex;
-    flex-direction: row;
-    height: 35px;
-    margin-bottom: 20px;
-}
-
-.friend form {
-    margin-left: auto;
-    display: flex;
-    height: 35px;
-}
-
-.friend form button {
-    background-color: var(--button-color);
-    border: solid 2px var(--secondary-color);
-    color: var(--secondary-color);
-    width: 90px;
-    height: 100%;
-    border-radius: 5px;
-    font-weight: 700;
-}
-
-#profileScreen {
-    display: block;
-    padding-top: 100px;
-    flex-direction: column;
-    width: 100%;
-}
-
-.profileCard p {
-    width: 100%;
-    text-align: center;
-    font-size: calc(2vw + 3vh);
-    font-weight: 800;
-    color: var(--text-color2);
-    margin-bottom: 30px;
-}
-
-.restName.home,
-.restLoc.home {
-    position: relative;
-}
-
-#noRestaurants {
-    font-size: 14pt;
-}
-
-#addScreen,
-#editScreen {
-    flex-direction: column;
-    padding-top: 20%;
-}
-
-#addTitle,
-#editTitle {
-    font-weight: 900;
-    font-size: 16pt;
-    color: var(--text-color1);
-    margin: 30px;
-    margin-top: 60px;
-}
-
-#addForm,
-#editForm {
-    background-color: var(--secondary-color);
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    border-radius: 5px;
-}
-
-#addForm label,
-#addForm input,
-#editForm label,
-#editForm input {
-    font-size: 14pt;
-    font-weight: 700;
-}
-
-#addForm input,
-#editForm input {
-    padding: 5px;
-}
-
-#addForm input,
-#addForm select,
-#editForm input,
-#editForm select {
-    margin-bottom: 20px;
-}
-
-#addForm button,
-#editForm button {
-    align-self: center;
-    background-color: var(--button-color);
-    border: solid 2px var(--secondary-color);
-    color: var(--secondary-color);
-    width: 95px;
-    height: 105%;
-    border-radius: 5px;
-    font-weight: 700;
-    line-height: 20px;
-}
-
-.center-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-    text-align: center;
-    padding: 20px;
-  }
-  
-  button {
-    margin-top: 10px;
+ 
+button {
     padding: 10px 20px;
     font-size: 1rem;
     cursor: pointer;
-  }
-  
-  ul {
+}
+
+ul {
     list-style: none;
     padding: 0;
+}
+
+#homeScreen {
+    background-color: var(--background-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding-top: 110px;
+}
+
+
+
+.button{
+    background-color: var(--primary-color); 
+    color: white; 
+    border: none; 
+    padding: 10px 15px; 
+    border-radius: 5px; 
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+#video{
+    margin-top: 30px;
+    border: solid white 2px;
+    background-color: gray;
+    border-radius: 10px;
+}
+
+#recent{
+    margin-top: 30px;
+    padding-top: 30px;
+
+    border-top: var(--text-color1) solid 2px;
+    margin-bottom: 100px;
+
+}
+
+#logout{
+    position: absolute; 
+    right: 5%; 
+    text-decoration: none;
+}
+
+#topBar{
+    position: absolute; 
+    top: 0;
+    height: 70px;
+    width: 100%;
+    background-color: #1a1b26;
+    color: white;
+    font-weight: 900;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#homeScreen h3{
+    font-size: 30px;
+    font-weight: 900;
+    background-color: rgba(255, 255, 255, 0.714);
+    padding: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+}
+
+
+#result {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 8px;
+    background-color: #f4f4f4;
+    color: #333;
+    max-width: 480px;
+    text-align: center;
+
   }
+
+#recent ul{
+    padding-top: 10px;
+}
+
+#recent ul li{
+    font-size: 24px;
+    margin: 10px;
+    background-color: rgba(255, 255, 255, 0.099);
+    color: var(--secondary-color)
+}
