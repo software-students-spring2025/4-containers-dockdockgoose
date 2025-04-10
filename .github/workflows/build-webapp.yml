@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - "web_app/**"
-      - "test/test_webapp.py"
+      - "tests/test_webapp.py"
 
 jobs:
   test-web_app:

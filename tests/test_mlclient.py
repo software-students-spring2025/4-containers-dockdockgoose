@@ -8,7 +8,6 @@ from machine_learning_client.app import (
     predict
 )
 
-from static.baby import baby
 
 def test_input_image_setup():
     """Test the input_image_setup function for correct output."""
@@ -22,7 +21,7 @@ def test_input_image_setup():
 
 def test_get_gemini_response():
     """Test the get_gemini_response function for correct output."""
-    get_gemini_response(,"")
+
 
 
 

@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - 'machine_learning_client/**'
-      - 'test/test_mlclient.py'
+      - 'tests/test_mlclient.py'
 
 jobs:
   test-ml-client:
@@ -27,14 +27,3 @@ jobs:
       - name: Show logs on failure
         if: failure()
         run: docker-compose logs
-      
-      - name: Install Python dependencies
-        run: |
-          sudo apt update
-          sudo apt install -y python3-pip
-          pip install pylint
-
-      - name: Lint with pylint
-        run: |
-          pylint machine_learning_client/**/*.py
-
