@@ -4,8 +4,11 @@ from unittest.mock import patch
 from flask import jsonify
 
 # Import the Flask app and functions
-from app import app, get_gemini_response
+import sys
+import os
 
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__) + "/.."))
+from app import app, get_gemini_response
 
 @pytest.fixture
 def client():
