@@ -11,10 +11,10 @@ Build a containerized app that uses machine learning. See [instructions](./instr
 
 ## Team Members of DOCKDOCKGOOSE
 
-- [Harini Buddaluru] (https://github.com/peanutoil)
-- [Clarissa Choi] (https://github.com/clammy424)
-- [Franyel Diaz Rodriguez] (https://github.com/Franyel1)
-- [Tony Liu] (https://github.com/tony102809)
+- [Harini Buddaluru](https://github.com/peanutoil)
+- [Clarissa Choi](https://github.com/clammy424)
+- [Franyel Diaz Rodriguez](https://github.com/Franyel1)
+- [Tony Liu](https://github.com/tony102809)
 
 ## Concept
 
@@ -106,4 +106,27 @@ Tony
 Harini 
 - did: login page
 - doing: home page
+- blockers: none
+
+### Standup Report - April 10th, 2025
+---
+
+Franyel 
+- did: tests for ml client and web app
+- doing: fixing bugs in tests
+- blockers: none
+
+Clarissa 
+- did: readme
+- doing: frontend and styles.css
+- blockers: none
+
+Tony 
+- did: edited home page and made logout function
+- doing: run pytests
+- block: none
+
+Harini 
+- did: contributed to login and registration pages
+- doing: helping with testing bugs
 - blockers: none
