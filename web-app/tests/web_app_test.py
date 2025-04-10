@@ -4,9 +4,10 @@
 import os
 import pytest
 from flask import Flask
-from app import app, User
+from app import app, User, db
 from unittest.mock import patch, MagicMock
 import io
+
 
 # Set env vars before importing the app that uses them
 os.environ["MONGO_URI"] = "mongodb://localhost:27017/"
@@ -19,8 +20,8 @@ def client():
     with app.test_client() as client:
         with app.app_context():
             # Clean up test DB
-            app.db.calcountInfo.delete_many({})
-            app.db.calorieData.delete_many({})
+            db.calcountInfo.delete_many({})
+            db.calorieData.delete_many({})
             User.create_user("test@example.com", "testuser", "password123")
         yield client
 
