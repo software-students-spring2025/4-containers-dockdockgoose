@@ -1,9 +1,9 @@
 
 ![Lint-free](https://github.com/nyu-software-engineering/containerized-app-exercise/actions/workflows/lint.yml/badge.svg)
 
-![ML Client - CI](https://github.com/software-students-spring2025/4-containers-dockdockgoose/actions/workflows/mlclient.yml/badge.svg?branch=main)
+[![ML Client CI](https://github.com/software-students-spring2025/4-containers-dockdockgoose/actions/workflows/mlclient.yml/badge.svg)](https://github.com/software-students-spring2025/4-containers-dockdockgoose/actions/workflows/mlclient.yml)
 
-![Web App - CI](https://github.com/software-students-spring2025/4-containers-dockdockgoose/actions/workflows/webapp.yml/badge.svg?branch=main)
+[![Web App CI](https://github.com/software-students-spring2025/4-containers-dockdockgoose/actions/workflows/webapp.yml/badge.svg)](https://github.com/software-students-spring2025/4-containers-dockdockgoose/actions/workflows/webapp.yml)
 
 # Containerized App Exercise
 
