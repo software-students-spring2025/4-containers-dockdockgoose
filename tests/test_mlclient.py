@@ -2,8 +2,11 @@
 
 import pytest  # pylint: disable=unused-import
 
-from machine_learning_client.app import input_image_setup
-
+from machine_learning_client.app import (
+    input_image_setup,
+    get_gemini_response,
+    predict
+)
 
 def test_input_image_setup():
     """Test the input_image_setup function for correct output."""
@@ -17,12 +20,13 @@ def test_input_image_setup():
 
 def test_get_gemini_response():
     """Test the get_gemini_response function for correct output."""
-    print("test test test")
+    get_gemini_response()
+
 
 
 def test_predict():
     """Test the test_predict function for correct output."""
-    print("hello")
+    
 
 
 def test_index():
