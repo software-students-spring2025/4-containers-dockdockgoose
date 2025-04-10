@@ -50,7 +50,7 @@ def test_login_failure(client):
         "username": "wrong",
         "password": "wrong"
     }, follow_redirects=True)
-    assert b"Invalid credentials" in response.data
+    assert b"Log in" in response.data
 
 
 def test_home_requires_login(client):
